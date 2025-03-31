@@ -6,7 +6,7 @@ const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const GUILD_ID = process.env.DISCORD_GUILD_ID;
 const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
 const STUDENT_ROLE_ID = process.env.DISCORD_STUDENT_ROLE_ID;
-const VALIDATION_API_URL = "https://pay.manualdolucas.com.br/wp-json/discord/v1/validar-aluno";
+const VALIDATION_API_URL = process.env.VALIDATION_API_URL; // agora é variável também
 
 const client = new Client({
   intents: [
@@ -22,8 +22,9 @@ client.once("ready", () => {
 
 client.on("guildMemberAdd", async (member) => {
   try {
-    const email = member.user.email || "sem@email.com";
-    const cpf = "000.000.000-00";
+    // email do usuário não vem no Discord por padrão (precisa de OAuth), então você pode usar um fixo
+    const email = "aluno@dominio.com"; // placeholder
+    const cpf = "000.000.000-00";      // placeholder
 
     const response = await fetch(VALIDATION_API_URL, {
       method: "POST",
