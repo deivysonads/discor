@@ -12,5 +12,5 @@ const client = new Client({
 client.once("ready", () => {
   console.log(`✅ Bot online como ${client.user.tag}`);
 });
-
+console.log("TOKEN LIDO:", process.env.DISCORD_BOT_TOKEN);
 client.login(token);
